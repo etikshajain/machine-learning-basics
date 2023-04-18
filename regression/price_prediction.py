@@ -8,6 +8,7 @@ from matplotlib import style
 from sklearn import preprocessing, svm
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+import pickle
 
 style.use('ggplot')
 
@@ -45,9 +46,15 @@ Y = np.array(df['label'])
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
 # classifier
-clf = LinearRegression()
-# train the data
-clf.fit(X_train, Y_train)
+# clf = LinearRegression()
+# # train the data
+# clf.fit(X_train, Y_train)
+# # saving the model
+# with open('LR.pickle', "wb") as f:
+#     pickle.dump(clf, f)
+
+pickle_in = open('LR.pickle', 'rb')
+clf = pickle.load(pickle_in)
 # get test score
 accuracy = clf.score(X_test, Y_test)
 
